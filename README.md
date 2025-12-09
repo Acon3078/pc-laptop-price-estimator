@@ -8,8 +8,8 @@ Interactive Streamlit app that predicts PC / laptop prices from hardware specs, 
 - `chatbot.py`: OpenAI-backed chat with dataset querying and synthetic fallback.
 - `explainability.py`: SHAP-based local explanation for predictions.
 - `data/clean/db_computers_cleaned.csv`: Cleaned dataset for the chatbot/context.
-- `price_prediction_pipeline.joblib`, `price_preprocessor.joblib`, `shap_background.joblib`: Artifacts exported from the training notebook.
-- `notebooks/EDA_and_Cleaning.ipynb` + `src/cleaning/`: Full EDA/cleaning workflow (optional).
+- `artifacts/`: Model artifacts exported from the training notebook (`price_prediction_pipeline.joblib`, `price_preprocessor.joblib`, `shap_background.joblib`).
+- `Model_Training.ipynb` + `src/cleaning/`: Full EDA/cleaning/modeling workflow (optional).
 
 ## Quickstart (local)
 ```bash
@@ -21,7 +21,7 @@ streamlit run app.py
 Then open the URL Streamlit prints (e.g., http://localhost:8501).
 
 ## Configuration
-- Model/data artifacts: keep the `price_prediction_pipeline.joblib`, `price_preprocessor.joblib`, `shap_background.joblib`, and `data/clean/db_computers_cleaned.csv` alongside the app. If you host them elsewhere, add a download step before app startup.
+- Model/data artifacts: keep the `artifacts/` folder (containing `price_prediction_pipeline.joblib`, `price_preprocessor.joblib`, `shap_background.joblib`) and `data/clean/db_computers_cleaned.csv` alongside the app. If you host them elsewhere, add a download step before app startup.
 - Chatbot: set `OPENAI_API_KEY` in a `.env` file or environment variable to enable LLM responses; otherwise it falls back to an echo reply. Secrets should live in `.streamlit/secrets.toml` when deploying to Streamlit Cloud.
 
 ## Deployment (Streamlit Community Cloud)
@@ -88,46 +88,27 @@ print("All packages installed successfully!")
 
 ### **Step 5: Run the EDA and Cleaning Process**
 
-#### **If Using Method A (Automated Script):**
-
-1. **Open** `run_everything.py` in any text editor or IDE
-2. **Run** the script:
-   - **VS Code**: Press `F5` or click "Run"
-   - **PyCharm**: Right-click → "Run 'run_everything'"
-   - **Spyder**: Press `F5`
-   - **Double-click**: If configured to run Python files
-3. **Wait** for the script to complete (may take a few minutes)
-4. **Check** output: `data/clean/db_computers_cleaned.csv` should be created
-
-**What happens:**
-- Script installs missing packages automatically
-- Runs all cleaning steps
-- Generates cleaned dataset
-- Shows summary statistics
-
----
-
-#### **If Using Method B (Jupyter Notebook - RECOMMENDED):**
+#### **Using Jupyter Notebook (RECOMMENDED):**
 
 **5.1: Open Jupyter Notebook**
 
 **Option 1 - Using Jupyter:**
 1. Open Terminal/Command Prompt
-2. Navigate to project folder: `cd "path/to/AI EDA FIXED"`
+2. Navigate to project folder: `cd "path/to/DAI Project Final"`
 3. Type: `jupyter notebook`
 4. Browser opens automatically
-5. Click on `notebooks/EDA_and_Cleaning.ipynb`
+5. Click on `Model_Training.ipynb`
 
 **Option 2 - Using VS Code:**
 1. Open VS Code
 2. Open the project folder
-3. Click on `notebooks/EDA_and_Cleaning.ipynb`
+3. Click on `Model_Training.ipynb`
 4. VS Code will open it as a notebook
 
 **Option 3 - Using PyCharm:**
 1. Open PyCharm
 2. Open the project folder
-3. Right-click `notebooks/EDA_and_Cleaning.ipynb`
+3. Right-click `Model_Training.ipynb`
 4. Select "Open in Jupyter"
 
 ---
@@ -207,12 +188,11 @@ The notebook is organized into sections. Run cells in order:
 
 ---
 
-#### **If Using Method C (Python Script):**
+#### **Using Model_Training.ipynb:**
 
-1. **Open** `run_cleaning.py` (if it exists) or create a new Python file
-2. **Copy** the code from the "Quick Code Examples" section below
-3. **Run** the script in your IDE
-4. **Check** output: `data/clean/db_computers_cleaned.csv`
+The notebook contains all the code needed for EDA, cleaning, and model training. Simply run all cells in order to generate:
+- Cleaned dataset: `data/clean/db_computers_cleaned.csv`
+- Model artifacts: `artifacts/price_prediction_pipeline.joblib`, `artifacts/price_preprocessor.joblib`, `artifacts/shap_background.joblib`
 
 ---
 
@@ -282,29 +262,10 @@ Your cleaned dataset is now ready for:
 
 ## 🚀 Quick Start - No Terminal Required!
 
-### Option 1: Run Everything Automatically (Easiest - Just Double-Click!)
-
-1. **Double-click** the file: `run_everything.py`
-   - Or open it in any Python IDE (VS Code, PyCharm, Spyder, etc.)
-   - Press `F5` or click "Run"
-
-2. **That's it!** The script will:
-   - Automatically install any missing packages
-   - Run the complete cleaning pipeline
-   - Generate the cleaned dataset
-   - Show you a summary
-
-3. **Find your cleaned dataset**:
-   - Location: `data/clean/db_computers_cleaned.csv`
-
-**No terminal, no commands, no setup needed!**
-
----
-
-### Option 2: Run the Jupyter Notebook (Interactive - Recommended for Exploration)
+### Option 1: Run the Jupyter Notebook (Interactive - Recommended)
 
 1. **Open the notebook** in Jupyter, VS Code, or any Python IDE:
-   - Navigate to: `notebooks/EDA_and_Cleaning.ipynb`
+   - Navigate to: `Model_Training.ipynb`
    - Double-click to open
 
 2. **Install packages** (if needed):
@@ -322,59 +283,7 @@ Your cleaned dataset is now ready for:
    - Visualizations (heatmaps, distributions)
    - Summary statistics
 
-5. **Done!** The cleaned dataset will be saved to `data/clean/db_computers_cleaned.csv`
-
----
-
-### Option 2: Run Python Script Directly
-
-1. **Open the Python script** in your IDE:
-   - File: `run_cleaning.py`
-   - Open it in VS Code, PyCharm, Spyder, or any Python IDE
-
-2. **Install packages** (if needed):
-   - In your IDE, install: `pandas`, `numpy`, `matplotlib`, `seaborn`
-   - Or add this at the top of the script temporarily:
-     ```python
-     import subprocess
-     import sys
-     subprocess.check_call([sys.executable, "-m", "pip", "install", "pandas", "numpy", "matplotlib", "seaborn"])
-     ```
-
-3. **Run the script**:
-   - **VS Code**: Press `F5` or click the "Run" button
-   - **PyCharm**: Right-click → "Run 'run_cleaning'"
-   - **Spyder**: Press `F5`
-   - **Any IDE**: Use the "Run" button or `Ctrl+F5` / `Cmd+F5`
-
-4. **Done!** The cleaned dataset will be saved to `data/clean/db_computers_cleaned.csv`
-
----
-
-### Option 3: Run in Python Interactive Mode
-
-1. **Open Python** (IDLE, IPython, or Python console in your IDE)
-
-2. **Copy and paste this code**:
-
-```python
-# Install packages (run once)
-import subprocess
-import sys
-packages = ['pandas', 'numpy', 'matplotlib', 'seaborn']
-for package in packages:
-    try:
-        __import__(package)
-        print(f"✓ {package} already installed")
-    except ImportError:
-        print(f"Installing {package}...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-# Now run the cleaning
-exec(open('run_cleaning.py').read())
-```
-
-3. **Press Enter** to execute
+5. **Done!** The cleaned dataset will be saved to `data/clean/db_computers_cleaned.csv` and model artifacts to `artifacts/`
 
 ---
 
@@ -388,8 +297,11 @@ exec(open('run_cleaning.py').read())
 │   ├── db_gpu_raw.csv                 # GPU reference data
 │   └── clean/
 │       └── db_computers_cleaned.csv   # Output: Cleaned dataset (generated)
-├── notebooks/
-│   └── EDA_and_Cleaning.ipynb         # Interactive EDA notebook ⭐
+├── Model_Training.ipynb               # Complete EDA/cleaning/modeling notebook ⭐
+├── artifacts/                          # Model artifacts (generated)
+│   ├── price_prediction_pipeline.joblib
+│   ├── price_preprocessor.joblib
+│   └── shap_background.joblib
 ├── src/
 │   └── cleaning/                      # Cleaning modules (required)
 │       ├── __init__.py
@@ -401,7 +313,6 @@ exec(open('run_cleaning.py').read())
 │       └── cleaning_pipeline.py
 ├── docs/
 │   └── data_cleaning_notes.md         # Documentation
-├── run_cleaning.py                    # Standalone cleaning script ⭐
 └── requirements.txt                   # Python dependencies
 ```
 
@@ -552,8 +463,8 @@ subprocess.check_call([sys.executable, "-m", "pip", "install", "pandas", "numpy"
 
 **Solution**: This happens when the notebook can't find the `src/cleaning/` directory. The notebook now has improved path detection, but if you still get this error:
 
-1. **Make sure you're running the notebook from the project root or notebooks folder**
-   - The notebook should be at: `notebooks/EDA_and_Cleaning.ipynb`
+1. **Make sure you're running the notebook from the project root**
+   - The notebook should be at: `Model_Training.ipynb`
    - The src folder should be at: `src/cleaning/`
 
 2. **Check the current working directory**:
@@ -595,7 +506,7 @@ subprocess.check_call([sys.executable, "-m", "pip", "install", "pandas", "numpy"
 
 **Solution**: Make sure you're running the script from the project root directory, or update the path in the code:
 ```python
-# In run_cleaning.py or notebook, change:
+# In Model_Training.ipynb, change:
 data_path = '../data/'  # If running from notebooks folder
 # OR
 data_path = 'data/'     # If running from project root
@@ -613,7 +524,7 @@ data_path = 'data/'     # If running from project root
 ## 📚 Documentation
 
 For detailed information about the EDA and cleaning process, see:
-- **`notebooks/EDA_and_Cleaning.ipynb`** - Interactive notebook with complete EDA and cleaning steps (run all cells to see full analysis)
+- **`Model_Training.ipynb`** - Interactive notebook with complete EDA, cleaning, and model training steps (run all cells to see full analysis)
 - **`docs/data_cleaning_notes.md`** - Complete documentation of all cleaning steps, issues found, and solutions
 - **`docs/missing_values_heatmap.png`** - Visualization of missing data patterns
 - **`docs/storage_distribution.png`** - Distribution of storage capacity
@@ -625,7 +536,7 @@ For detailed information about the EDA and cleaning process, see:
 ### Run cleaning from Python script:
 
 ```python
-# Just open and run run_cleaning.py in your IDE
+# Just open and run Model_Training.ipynb in your IDE
 # Or copy this into a new Python file:
 
 import sys
@@ -661,7 +572,7 @@ df = clean_storage_fields(df, ssd_col='Disco duro_Capacidad de memoria SSD')
 
 ## ✅ Checklist Before Submission
 
-- [ ] Notebook runs successfully: `notebooks/EDA_and_Cleaning.ipynb`
+- [ ] Notebook runs successfully: `Model_Training.ipynb`
 - [ ] Cleaned dataset generated: `data/clean/db_computers_cleaned.csv`
 - [ ] Documentation complete: `docs/data_cleaning_notes.md`
 - [ ] All Python modules included: `src/cleaning/*.py`

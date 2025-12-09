@@ -32,11 +32,10 @@ docs/data/raw/
 !docs/**/*.png
 
 # Allow-List Essential Shipped Artifacts
-!price_prediction_pipeline.joblib
-!price_preprocessor.joblib
-!shap_background.joblib
+!artifacts/price_prediction_pipeline.joblib
+!artifacts/price_preprocessor.joblib
+!artifacts/shap_background.joblib
 !data/clean/db_computers_cleaned.csv
-!docs/data/clean/db_computers_cleaned.csv
 
 # Logs / Reports
 logs/

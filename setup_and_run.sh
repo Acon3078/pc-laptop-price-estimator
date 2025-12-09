@@ -1,7 +1,7 @@
 #!/bin/bash
-# Setup script to install dependencies and run cleaning pipeline
+# Setup script to install dependencies for the project
 
-echo "Setting up Python environment for data cleaning..."
+echo "Setting up Python environment..."
 
 # Check if virtual environment exists
 if [ ! -d "venv" ]; then
@@ -15,13 +15,15 @@ source venv/bin/activate
 
 # Install dependencies
 echo "Installing required packages..."
-pip install -q pandas numpy matplotlib seaborn
-
-# Run cleaning script
-echo ""
-echo "Running cleaning pipeline..."
-python3 run_cleaning.py
+pip install -q -r requirements.txt
 
 echo ""
-echo "Done! Check data/clean/db_computers_cleaned.csv for the cleaned dataset."
+echo "Setup complete!"
+echo ""
+echo "To run data cleaning and model training:"
+echo "  - Open Model_Training.ipynb in Jupyter/VS Code"
+echo "  - Run all cells to generate cleaned dataset and model artifacts"
+echo ""
+echo "To run the Streamlit app:"
+echo "  streamlit run app.py"
 

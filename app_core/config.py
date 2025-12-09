@@ -1,15 +1,15 @@
 from pathlib import Path
 
-# Base directories
+# Base Directories
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Model and data artifacts
-MODEL_PATH = BASE_DIR / "price_prediction_pipeline.joblib"
-PREPROCESSOR_PATH = BASE_DIR / "price_preprocessor.joblib"
-SHAP_BACKGROUND_PATH = BASE_DIR / "shap_background.joblib"
+# Model and Data Artifacts
+MODEL_PATH = BASE_DIR / "artifacts" / "price_prediction_pipeline.joblib"
+PREPROCESSOR_PATH = BASE_DIR / "artifacts" / "price_preprocessor.joblib"
+SHAP_BACKGROUND_PATH = BASE_DIR / "artifacts" / "shap_background.joblib"
 DATA_PATH = BASE_DIR / "data" / "clean" / "db_computers_cleaned.csv"
 
-# Feature lists (kept in one place to avoid drift across modules)
+# Feature Lists (kept in one place to avoid drift across modules)
 NUMERIC_FEATURES = [
     "cpu_bench_mark",
     "cpu_bench_rank",

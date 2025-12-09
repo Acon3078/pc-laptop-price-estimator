@@ -8,10 +8,10 @@
   - `data.py`: Cached loader for the cleaned dataset used by the chatbot.
 - `explainability.py`: SHAP explainer that reuses the shared feature list and artifacts to return price + top-k contributions + summary.
 - `chatbot.py`: OpenAI-backed chat flow. Extracts filters, queries the cleaned dataset, falls back to synthetic rows if needed, and formats responses; echoes if no API key.
-- `notebooks/EDA_and_Cleaning.ipynb` and `src/cleaning/`: Data prep pipeline that produces the cleaned dataset and the model artifacts used by the app.
+- `Model_Training.ipynb` and `src/cleaning/`: Data prep pipeline that produces the cleaned dataset and the model artifacts used by the app.
 
 ## Data & model artifacts
-- Required at runtime: `price_prediction_pipeline.joblib`, `price_preprocessor.joblib`, `shap_background.joblib`, and `data/clean/db_computers_cleaned.csv`.
+- Required at runtime: `artifacts/price_prediction_pipeline.joblib`, `artifacts/price_preprocessor.joblib`, `artifacts/shap_background.joblib`, and `data/clean/db_computers_cleaned.csv`.
 - Optional hosting: If these are large, host externally (e.g., object storage or Git LFS) and add a small download-on-start hook before loading the pipeline.
 
 ## Caching & performance
