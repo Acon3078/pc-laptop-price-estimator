@@ -1,0 +1,48 @@
+# Virtual environments and Python cache
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# OS / editor junk
+.DS_Store
+.idea/
+.vscode/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Environment / secrets
+.env
+
+# Data and artifacts
+data/raw/
+data/db_*.csv
+docs/data/raw/
+
+# Large or local outputs (allow-listed below)
+*.joblib
+*.pkl
+*.png
+*.pdf
+*.xlsx
+*.csv
+
+# Allow-list documentation assets
+!docs/**/*.png
+
+# Allow-list essential shipped artifacts
+!price_prediction_pipeline.joblib
+!price_preprocessor.joblib
+!shap_background.joblib
+!data/clean/db_computers_cleaned.csv
+!docs/data/clean/db_computers_cleaned.csv
+
+# Logs / reports
+logs/
+*.log
+*.tmp
+
+# Streamlit
+.streamlit/secrets.toml
+
