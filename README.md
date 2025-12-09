@@ -6,7 +6,7 @@ Interactive Streamlit app that predicts PC / laptop prices from hardware specs, 
 - `app.py`: Streamlit entrypoint (tabs for prediction, debug, chatbot).
 - `app_core/`: Shared config, feature lists, pipeline loaders, and dataset helper.
 - `chatbot.py`: OpenAI-backed chat with dataset querying and synthetic fallback.
-- `explain_api.py`: SHAP-based local explanation for predictions.
+- `explainability.py`: SHAP-based local explanation for predictions.
 - `data/clean/db_computers_cleaned.csv`: Cleaned dataset for the chatbot/context.
 - `price_prediction_pipeline.joblib`, `price_preprocessor.joblib`, `shap_background.joblib`: Artifacts exported from the training notebook.
 - `notebooks/EDA_and_Cleaning.ipynb` + `src/cleaning/`: Full EDA/cleaning workflow (optional).
@@ -33,7 +33,7 @@ Then open the URL Streamlit prints (e.g., http://localhost:8501).
 ## Testing
 - Smoke test locally: fill the prediction form and submit; check history table.
 - Chatbot: ask for a hardware combo; without an API key it echoes, with a key it queries the dataset and returns model-based prices.
-- Optional sanity check: `python -m compileall app_core app.py chatbot.py explain_api.py`.
+- Optional sanity check: `python -m compileall app_core app.py chatbot.py explainability.py`.
 
 ## Project structure (clean vs. raw data)
 - Keep raw CSVs out of version control; retain the cleaned dataset and model artifacts needed to run the app.

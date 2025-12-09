@@ -25,9 +25,9 @@ st.set_page_config(
 # TRY TO LOAD SHAP EXPLAINABILITY API
 # -------------------------------------------------------------------
 try:
-    from explain_api import predict_and_explain
+    from explainability import predict_and_explain
 except Exception:
-    # If explain_api.py is missing or broken, fall back to None
+    # If explainability.py is missing or broken, fall back to None
     predict_and_explain = None
 
 # -------------------------------------------------------------------
@@ -538,7 +538,7 @@ with tab_form:
             predicted_price = predict_price(pipeline, row_df)
             summary_text = (
                 "Explainability module not connected yet. "
-                "Toni can plug in `predict_and_explain(row_df)` via explain_api.py."
+                "Toni can plug in `predict_and_explain(row_df)` via explainability.py."
             )
 
         # Save to history

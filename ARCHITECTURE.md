@@ -6,7 +6,7 @@
   - `config.py`: Central feature lists and artifact paths (model, preprocessor, SHAP background, cleaned dataset).
   - `pipeline.py`: Loading/caching of sklearn pipeline & preprocessor, default/option extraction, input row builder, and core prediction helper.
   - `data.py`: Cached loader for the cleaned dataset used by the chatbot.
-- `explain_api.py`: SHAP explainer that reuses the shared feature list and artifacts to return price + top-k contributions + summary.
+- `explainability.py`: SHAP explainer that reuses the shared feature list and artifacts to return price + top-k contributions + summary.
 - `chatbot.py`: OpenAI-backed chat flow. Extracts filters, queries the cleaned dataset, falls back to synthetic rows if needed, and formats responses; echoes if no API key.
 - `notebooks/EDA_and_Cleaning.ipynb` and `src/cleaning/`: Data prep pipeline that produces the cleaned dataset and the model artifacts used by the app.
 
