@@ -146,7 +146,7 @@ TEXT = {
     },
 }
 
-# session state for language
+# Session state for language
 if "lang" not in st.session_state:
     st.session_state["lang"] = "en"
 

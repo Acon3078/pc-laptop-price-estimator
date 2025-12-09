@@ -56,7 +56,7 @@ def get_feature_defaults(preprocessor) -> dict:
     defaults = {}
 
     if preprocessor is None:
-        # fallback generic defaults if preprocessor not available
+        # Fallback generic defaults if preprocessor not available
         for f in NUMERIC_FEATURES:
             defaults[f] = 0.0
         for f in CATEGORICAL_FEATURES:
