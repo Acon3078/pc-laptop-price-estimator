@@ -40,7 +40,7 @@ Then open the URL Streamlit prints (e.g., http://localhost:8501).
 - If size is an issue, store artifacts in object storage/Git LFS and add a small bootstrap download in `app.py`.
 
 ## EDA / data cleaning (optional)
-- Run `notebooks/EDA_and_Cleaning.ipynb` for the full exploration, or `run_everything.py` / `run_cleaning.py` for scripted cleaning. Outputs land in `data/clean/` and feed the app’s artifacts.
+- Run `Model_Training.ipynb` for the full exploration, cleaning, and model training. Outputs land in `data/clean/` and feed the app’s artifacts.
 - Open Terminal/Command Prompt
 - Type: `python --version` or `python3 --version`
 - Should show: `Python 3.8.x` or higher
@@ -311,9 +311,23 @@ Your cleaned dataset is now ready for:
 │       ├── clean_screen.py
 │       ├── clean_multilabel.py
 │       └── cleaning_pipeline.py
+├── app.py                             # Streamlit app entrypoint
+├── chatbot.py                         # OpenAI-powered chatbot
+├── explainability.py                  # SHAP explainability module
+├── app_core/                          # Shared app utilities
+│   ├── __init__.py
+│   ├── config.py                      # Feature lists and paths
+│   ├── pipeline.py                    # Pipeline loaders
+│   └── data.py                        # Dataset loader
 ├── docs/
-│   └── data_cleaning_notes.md         # Documentation
+│   ├── CLEANING_DOCUMENTATION.md     # Complete cleaning documentation
+│   ├── missing_values_heatmap.png
+│   ├── storage_distribution.png
+│   ├── screen_size_distribution.png
+│   └── ram_distribution.png
 └── requirements.txt                   # Python dependencies
+
+Note: Raw data files (`db_computers_2025_raw.csv`, `db_cpu_raw.csv`, `db_gpu_raw.csv`) are optional and may not be included in the repository.
 ```
 
 ## 📊 Exploratory Data Analysis (EDA) - Step by Step
@@ -472,7 +486,7 @@ subprocess.check_call([sys.executable, "-m", "pip", "install", "pandas", "numpy"
    - Make sure you're in the right location
 
 3. **If using Jupyter Notebook/Lab**:
-   - Navigate to the project folder first: `cd "path/to/AI EDA FIXED"`
+   - Navigate to the project folder first: `cd "path/to/DAI Project Final"`
    - Then start Jupyter: `jupyter notebook`
 
 4. **If using VS Code**:
@@ -486,7 +500,7 @@ subprocess.check_call([sys.executable, "-m", "pip", "install", "pandas", "numpy"
    import sys
    import os
    # Manually set the project root
-   project_root = '/Users/haidar/Downloads/AI EDA FIXED'  # Change to your path
+   project_root = '/path/to/DAI Project Final'  # Change to your path
    src_path = os.path.join(project_root, 'src')
    sys.path.insert(0, src_path)
    ```
@@ -525,7 +539,7 @@ data_path = 'data/'     # If running from project root
 
 For detailed information about the EDA and cleaning process, see:
 - **`Model_Training.ipynb`** - Interactive notebook with complete EDA, cleaning, and model training steps (run all cells to see full analysis)
-- **`docs/data_cleaning_notes.md`** - Complete documentation of all cleaning steps, issues found, and solutions
+- **`docs/CLEANING_DOCUMENTATION.md`** - Complete documentation of all cleaning steps, issues found, and solutions
 - **`docs/missing_values_heatmap.png`** - Visualization of missing data patterns
 - **`docs/storage_distribution.png`** - Distribution of storage capacity
 - **`docs/screen_size_distribution.png`** - Distribution of screen sizes
@@ -574,7 +588,7 @@ df = clean_storage_fields(df, ssd_col='Disco duro_Capacidad de memoria SSD')
 
 - [ ] Notebook runs successfully: `Model_Training.ipynb`
 - [ ] Cleaned dataset generated: `data/clean/db_computers_cleaned.csv`
-- [ ] Documentation complete: `docs/data_cleaning_notes.md`
+- [ ] Documentation complete: `docs/CLEANING_DOCUMENTATION.md`
 - [ ] All Python modules included: `src/cleaning/*.py`
 - [ ] All cells in notebook execute without errors
 - [ ] Visualizations generate correctly
