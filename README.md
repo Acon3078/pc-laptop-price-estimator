@@ -1,25 +1,33 @@
 # Computer Price Estimator (Streamlit)
 
 ## 1) Project Overview — One-Sentence Value Proposition
-Predict realistic laptop/PC prices from hardware specs in seconds, with a bilingual Streamlit UI, explainability, and an optional AI assistant to explore the dataset.
+This project delivers an end-to-end machine-learning web application that analyzes a large computer-market dataset to provide accurate and explainable price predictions through both traditional and natural-language interfaces.
 
 ## 2) Key Features / What It Does
-- Price prediction form for laptops/PCs (EN/ES UI).
-- SHAP-based explanations to show which specs drive the price.
-- OpenAI-powered chatbot that can query the cleaned dataset (falls back to echo if no key).
-- Cleaned reference dataset and reusable model artifacts ready for deployment.
+- **EDA and Cleaning**: Examining distributions and missing values to guide appropriate imputation and normalization for handling sparsity.
+- **Predictive Price Estimation**: Model-based prediction of computer prices based on user-defined configurations or provided product features.
+- **Feature Importance & Explainability**: Clear breakdown of which components most influence the predicted price.
+- **Dual User Interfaces**:
+    - Standard input fields (sliders, dropdowns, checkboxes) for structured data entry.
+    - A lightweight natural-language interface enabling users to request predictions conversationally.
+- **Feedback Capture**: A simple in-app mechanism that records user prediction history per session, with planned future use for evaluating outputs and monitoring quality.
 
 ## 3) Why This Project Matters (Impact / Use Cases)
-- Helps shoppers and resellers benchmark fair prices before buying or listing hardware.
-- Assists procurement or support teams in giving consistent, data-backed quotes.
-- Demonstrates an end-to-end ML workflow: cleaning, modeling, explainability, and UX.
+- Supports informed purchasing decisions by transforming complex product specifications into interpretable insights and price expectations.
+- Improves market transparency through data-driven exploration of thousands of real marketplace listings.
+- Demonstrates practical ML deployment by connecting model development, evaluation, and serving in a real web application.
+- Bridges human–AI interaction with both structured UI components and conversational agent capabilities.
 
 ## 4) Tech Stack & Skills Demonstrated
-- Streamlit (multi-tab app, bilingual UX), Python
-- scikit-learn pipelines + joblib artifacts
-- SHAP for local model explanations
-- OpenAI API integration for dataset Q&A
-- pandas/numpy data cleaning and feature engineering (see `src/cleaning/`, `Model_Training.ipynb`)
+- **Tools & Libraries**: Python, pandas, numpy, scikit-learn pipelines + joblib artifacts, Streamlit, matplotlib/seaborn, OpenAI-powered chatbot (echo fallback without key).
+
+- **Data Skills**: EDA, cleaning unstructured and multilingual fields, handling missing data, feature engineering, semantic alignment.
+
+- **Modeling Skills**: Regression modeling, feature selection, model training/validation, hyperparameter tuning, performance estimation, explainability.
+
+- **ML Workflow Competencies**: Model serving, agent-based NLP interfaces, bilingual UI integration, and end-to-end ML pipeline structuring.
+
+- **Software Practices:** Code organization, modularization, testing, documentation, and collection of user feedback for future iterative improvement.
 
 ## 5) How It Works (High-Level Flow)
 - Data → Cleaned via the notebook and `src/cleaning/` utilities → saved to `data/clean/db_computers_cleaned.csv`.
@@ -40,6 +48,11 @@ Notes:
 - Keep `artifacts/` and `data/clean/db_computers_cleaned.csv` alongside `app.py`. If you host them elsewhere, add a small download step before startup.
 - Set `OPENAI_API_KEY` in your environment or `.env` to enable chatbot answers; without it, the chatbot echoes.
 - For a deeper dive or to regenerate artifacts, run `Model_Training.ipynb` (full EDA/cleaning/model training) or use the functions in `src/cleaning/`.
+
+## 7) Roadmap / Next Steps
+- Persist prediction history + optional user feedback (via the `log_interaction` helper in `Model_Training.ipynb`) to monitor usage and improve the model.
+- Add an in-app “Model Insights” view for global/importances already exported from the notebook.
+- Optional: Host artifacts remotely and add a startup download hook for lighter deployments.
 
 ## Connect with me
 <p>
