@@ -55,6 +55,38 @@ def extract_screen_size_inches(value):
     return inches
 
 
+def _parse_european_number(num_str):
+    """
+    Parse a number string that may use European formatting.
+    
+    Handles:
+    - "1.920" → 1920 (thousands separator)
+    - "1920" → 1920 (no separator)
+    - "1,5" → 1 (decimal separator, but we truncate for pixels)
+    
+    Parameters:
+    -----------
+    num_str : str
+        Number string that may contain . or , separators
+    
+    Returns:
+    --------
+    int or None
+        Parsed integer value, or None if parsing fails
+    """
+    if not num_str:
+        return None
+    
+    # Remove all thousands separators (dots in European format)
+    # For pixel resolutions, we want integers, so we can safely remove all separators
+    cleaned = num_str.replace('.', '').replace(',', '')
+    
+    try:
+        return int(cleaned)
+    except (ValueError, AttributeError):
+        return None
+
+
 def parse_resolution(value):
     """
     Parse resolution string into width and height.
@@ -62,7 +94,8 @@ def parse_resolution(value):
     Handles formats like:
     - "1920 x 1080 píxeles"
     - "1920x1080"
-    - "3.024 x 1.964 píxeles"
+    - "1.920 x 1.080 píxeles" (European thousands separator)
+    - "3.840 x 2.400 píxeles" (European thousands separator)
     - "Full HD"
     
     Parameters:
@@ -109,15 +142,19 @@ def parse_resolution(value):
     
     # Try to extract two numbers separated by x
     # Pattern: number x number (with optional spaces and text)
+    # This pattern captures numbers that may contain . or , as separators
     pattern = r'(\d+[.,]?\d*)\s*[x×]\s*(\d+[.,]?\d*)'
     match = re.search(pattern, value_str, re.IGNORECASE)
     
     if match:
         try:
-            x = float(match.group(1).replace(',', '.'))
-            y = float(match.group(2).replace(',', '.'))
-            result['resolution_x'] = int(x)
-            result['resolution_y'] = int(y)
+            # Parse numbers handling European formatting (thousands separators)
+            x = _parse_european_number(match.group(1))
+            y = _parse_european_number(match.group(2))
+            
+            if x is not None and y is not None:
+                result['resolution_x'] = x
+                result['resolution_y'] = y
         except (ValueError, AttributeError):
             pass
     
