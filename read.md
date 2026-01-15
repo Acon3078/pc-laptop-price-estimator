@@ -3,7 +3,12 @@
 ## 1) Project Overview — One-Sentence Value Proposition
 End-to-end ML web app that cleans and enriches a large computer-market dataset, trains a regression pipeline, and serves **price predictions with local explainability (SHAP)** via both a structured UI and an optional natural-language interface.
 
-## 2) Key Features / What It Does
+## 2) Scope
+- Price prediction from partially specified computer specs via a trained regression pipeline
+- Per-prediction explainability (SHAP contribution breakdown) plus global feature importances
+- Two interaction modes: structured form inputs + optional natural-language querying (API-key gated fallback)
+
+## 3) Key Features / What It Does
 - **EDA + Data Quality Profiling:** visualizes distributions and missingness (133/136 columns have missing values; many are sparse).
 - **Data Cleaning & Parsing (multilingual/unstructured):**
   - Normalizes CPU/GPU strings (removes trademarks/Spanish terms) for benchmark matching.
@@ -11,6 +16,7 @@ End-to-end ML web app that cleans and enriches a large computer-market dataset, 
   - Extracts screen size/resolution from Spanish formats (e.g., `15.6 pulgadas`, `1920 x 1080`) and derives pixel density.
   - Simplifies multilabel fields by taking the first label across ~49 columns (e.g., `/`, `+`, `,`, `|` separators).
 - **External Data Enrichment:** fuzzy matches CPU/GPU models to benchmark tables (PassMark-style datasets) to add `mark/rank/value` features.
+- **Handles Incomplete Inputs:** supports partially specified configurations by using sensible defaults + pipeline-based imputation (preprocessor fit on training data to avoid leakage).
 - **Predictive Price Estimation:** scikit-learn `Pipeline` + `ColumnTransformer` with:
   - numeric: median imputation → scaling
   - categorical: most-frequent imputation → one-hot encoding (`handle_unknown="ignore"`)
@@ -20,13 +26,13 @@ End-to-end ML web app that cleans and enriches a large computer-market dataset, 
   - Natural-language chatbot that (when enabled) extracts constraints and queries the dataset + model to answer conversationally.
 - **Prediction History (per session):** stores user prediction history in Streamlit `session_state` (not yet persisted).
 
-## 3) Results (Validation Split)
+## 4) Results (Validation Split)
 Trained on **8,064 listings** with an **80/20 split** (random_state=42).
 - **Validation RMSE:** 278.47  
 - **Validation MAE:** 191.99  
 - **Best CV RMSE (tuning run):** 269.96 (5-fold CV)
 
-## 4) Tech Stack & Skills Demonstrated (Concrete)
+## 5) Tech Stack & Skills Demonstrated (Concrete)
 **Core ML & Data**
 - Dataset profiling + missingness analysis on a sparse real-world dataset (8,064 × 136 raw features).
 - Robust parsing of multilingual specs (storage, screen size/resolution, numeric extraction with European separators).
@@ -52,7 +58,7 @@ Trained on **8,064 listings** with an **80/20 split** (random_state=42).
 - Two-step flow: LLM extracts filters → app queries dataset and predicts using the same model pipeline.
 - Guardrails + error handling for quota/auth failures with graceful fallback.
 
-## 5) How It Works (High-Level Flow)
+## 6) How It Works (High-Level Flow)
 - **Data** → cleaned/enriched in `Model_Training.ipynb` + `src/cleaning/` → saved to `data/clean/db_computers_cleaned.csv` (and feature-engineered `db_computers_final.csv`).
 - **Modeling** → pipeline exported to:
   - `artifacts/price_prediction_pipeline.joblib`
@@ -61,7 +67,7 @@ Trained on **8,064 listings** with an **80/20 split** (random_state=42).
 - **App** → `app.py` loads artifacts, provides tabs for prediction / debug / chatbot, and renders SHAP-based explanations when available.
 - **Chatbot** → `chatbot.py` answers dataset/model questions (requires `OPENAI_API_KEY`; otherwise echo mode).
 
-## 6) Quick Start / How to Run
+## 7) Quick Start / How to Run
 ```bash
 python -m venv .venv
 source .venv/bin/activate
@@ -74,7 +80,7 @@ Then open the URL Streamlit prints (e.g., http://localhost:8501).
 - Keep `artifacts/` and `data/clean/db_computers_cleaned.csv` alongside `app.py`.
 - Set `OPENAI_API_KEY` (env or `.env`) to enable the chatbot’s “smart” mode; without it, the chatbot echoes.
 
-## 7) Roadmap / Next Steps
+## 8) Roadmap / Next Steps
 - Persist prediction history to disk/DB (the notebook includes a `log_interaction()` JSONL helper; not currently wired into the app).
 - Add a dedicated “Model Insights” view to surface global importances already exported from training.
 - Optional: host artifacts remotely and add a startup download hook.
