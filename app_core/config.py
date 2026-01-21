@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATH = BASE_DIR / "artifacts" / "price_prediction_pipeline.joblib"
 PREPROCESSOR_PATH = BASE_DIR / "artifacts" / "price_preprocessor.joblib"
 SHAP_BACKGROUND_PATH = BASE_DIR / "artifacts" / "shap_background.joblib"
-DATA_PATH = BASE_DIR / "data" / "clean" / "db_computers_cleaned.csv"
+DATA_PATH = BASE_DIR / "data" / "clean" / "db_computers_cleaned.parquet"
 
 # Feature Lists (kept in one place to avoid drift across modules)
 NUMERIC_FEATURES = [

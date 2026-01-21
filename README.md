@@ -30,7 +30,7 @@ This project delivers an end-to-end machine-learning web application that analyz
 - **Software Practices:** Code organization, modularization, testing, documentation, and collection of user feedback for future iterative improvement.
 
 ## 5) How It Works (High-Level Flow)
-- Data → Cleaned via the notebook and `src/cleaning/` utilities → saved to `data/clean/db_computers_cleaned.csv`.
+- Data → Cleaned via the notebook and `src/cleaning/` utilities → saved to `data/clean/db_computers_cleaned.parquet`.
 - Modeling → Trained pipelines exported to `artifacts/price_prediction_pipeline.joblib`, `price_preprocessor.joblib`, `shap_background.joblib`.
 - App → `app.py` loads artifacts, renders tabs for prediction/debug/chatbot, and serves SHAP explanations.
 - Chatbot → `chatbot.py` answers dataset questions and can synthesize estimates; uses `OPENAI_API_KEY` when available.
@@ -45,7 +45,7 @@ streamlit run app.py
 Then open the URL Streamlit prints (e.g., http://localhost:8501).
 
 Notes:
-- Keep `artifacts/` and `data/clean/db_computers_cleaned.csv` alongside `app.py`. If you host them elsewhere, add a small download step before startup.
+- Keep `artifacts/` and `data/clean/db_computers_cleaned.parquet` alongside `app.py`. If you host them elsewhere, add a small download step before startup.
 - Set `OPENAI_API_KEY` in your environment or `.env` to enable chatbot answers; without it, the chatbot echoes.
 - For a deeper dive or to regenerate artifacts, run `Model_Training.ipynb` (full EDA/cleaning/model training) or use the functions in `src/cleaning/`.
 

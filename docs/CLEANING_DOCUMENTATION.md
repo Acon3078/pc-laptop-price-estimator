@@ -245,7 +245,7 @@ config = get_default_config()
 df_clean = clean_dataframe(df, config)
 
 # Export
-df_clean.to_csv('data/clean/db_computers_cleaned.csv', index=False)
+df_clean.to_parquet('data/clean/db_computers_cleaned.parquet', index=False)
 ```
 
 ### Individual Cleaning Functions

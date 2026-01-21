@@ -59,7 +59,7 @@ Trained on **8,064 listings** with an **80/20 split** (random_state=42).
 - Guardrails + error handling for quota/auth failures with graceful fallback.
 
 ## 6) How It Works (High-Level Flow)
-- **Data** → cleaned/enriched in `Model_Training.ipynb` + `src/cleaning/` → saved to `data/clean/db_computers_cleaned.csv` (and feature-engineered `db_computers_final.csv`).
+- **Data** → cleaned/enriched in `Model_Training.ipynb` + `src/cleaning/` → saved to `data/clean/db_computers_cleaned.parquet` (and feature-engineered `db_computers_final.parquet`).
 - **Modeling** → pipeline exported to:
   - `artifacts/price_prediction_pipeline.joblib`
   - `artifacts/price_preprocessor.joblib`
@@ -77,7 +77,7 @@ streamlit run app.py
 Then open the URL Streamlit prints (e.g., http://localhost:8501).
 
 **Notes**
-- Keep `artifacts/` and `data/clean/db_computers_cleaned.csv` alongside `app.py`.
+- Keep `artifacts/` and `data/clean/db_computers_cleaned.parquet` alongside `app.py`.
 - Set `OPENAI_API_KEY` (env or `.env`) to enable the chatbot’s “smart” mode; without it, the chatbot echoes.
 
 ## 8) Roadmap / Next Steps

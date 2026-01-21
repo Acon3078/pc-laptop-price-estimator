@@ -10,7 +10,7 @@ def load_dataset():
     if not DATA_PATH.exists():
         return None
     try:
-        return pd.read_csv(DATA_PATH, low_memory=False)
+        return pd.read_parquet(DATA_PATH)
     except Exception:
         return None
 
