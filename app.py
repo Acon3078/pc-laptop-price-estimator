@@ -194,15 +194,7 @@ Default values are automatically suggested when you’re unsure.
 Once the configuration is complete, the model predicts the **market price** based on thousands of real products.
 
 ### 3. Understand *why* that price was predicted  
-The estimator provides a short explanation that highlights the most important components influencing the price.  
-(This module can be enhanced with Toni’s full SHAP explainability.)
-
----
-
-This tool is part of the **DAI Group Project**, specifically supporting:
-
-- **Application UI**  
-- **Explainability**  
+The estimator provides a short explanation that highlights the most important components influencing the price.
 
 ---
 
@@ -224,15 +216,7 @@ Se proponen valores por defecto automáticamente cuando no estás seguro.
 Cuando la configuración está completa, el modelo predice el **precio de mercado** usando miles de productos reales.
 
 ### 3. Entender *por qué* se ha predicho ese precio  
-El estimador genera una breve explicación con los componentes que más influyen en el precio.  
-(Este módulo se puede ampliar con toda la explicabilidad SHAP de Toni.)
-
----
-
-Esta herramienta forma parte del **DAI Group Project**, apoyando:
-
-- **Interfaz de aplicación (Application UI)**  
-- **Explicabilidad (Explainability)**  
+El estimador genera una breve explicación con los componentes que más influyen en el precio.
 
 ---
 
@@ -536,10 +520,7 @@ with tab_form:
             summary_text = result.get("summary", "")
         else:
             predicted_price = predict_price(pipeline, row_df)
-            summary_text = (
-                "Explainability module not connected yet. "
-                "Toni can plug in `predict_and_explain(row_df)` via explainability.py."
-            )
+            summary_text = ""
 
         # Save to history
         st.session_state["prediction_history"].append(
