@@ -46,7 +46,8 @@ Then open the URL Streamlit prints (e.g., http://localhost:8501).
 
 Notes:
 - Keep `artifacts/` and `data/clean/db_computers_cleaned.parquet` alongside `app.py`. If you host them elsewhere, add a small download step before startup.
-- Set `OPENAI_API_KEY` in your environment or `.env` to enable chatbot answers; without it, the chatbot echoes.
+- Set `OPENAI_API_KEY` in your environment or `.env` to enable chatbot answers; without it, the chatbot runs in simple echo mode.
+- The public demo is LLM-disabled; to use the full chatbot, **clone this repo and run it locally after setting your own `OPENAI_API_KEY` in a `.env` file or environment variable.**
 - For a deeper dive or to regenerate artifacts, run `Model_Training.ipynb` (full EDA/cleaning/model training) or use the functions in `src/cleaning/`.
 
 ## 7) Roadmap / Next Steps

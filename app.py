@@ -617,8 +617,9 @@ with tab_chat:
 
     if not chatbot.is_ready():
         st.info(
-            "💡 To enable AI responses, set OPENAI_API_KEY in .env file. "
-            "Using basic echo mode for now."
+            "💡 In this online demo the AI chatbot runs in basic echo mode. "
+            "To enable full LLM responses, clone the repository and run it locally "
+            "with your own `OPENAI_API_KEY` set in a `.env` file or environment variable."
         )
 
     if prompt:

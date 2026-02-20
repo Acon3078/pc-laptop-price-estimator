@@ -1,12 +1,12 @@
 # Computer Price Estimator (Streamlit)
 
 ## 1) Project Overview — One-Sentence Value Proposition
-End-to-end ML web app that cleans and enriches a large computer-market dataset, trains a regression pipeline, and serves **price predictions with local explainability (SHAP)** via both a structured UI and an optional natural-language interface.
+End-to-end ML web app that cleans and enriches a large computer-market dataset, trains a regression pipeline, and serves **price predictions with local explainability** via both a structured UI and an optional natural-language interface.
 
 ## 2) Scope
-- Price prediction from partially specified computer specs via a trained regression pipeline
-- Per-prediction explainability (SHAP contribution breakdown) plus global feature importances
-- Two interaction modes: structured form inputs + optional natural-language querying (API-key gated fallback)
+- Price prediction from partially specified computer specs via a trained regression pipeline.
+- Per-prediction explainability (SHAP contribution breakdown) plus global feature importances.
+- Two interaction modes: structured form inputs + optional natural-language querying (API-key gated fallback).
 
 ## 3) Key Features / What It Does
 - **EDA + Data Quality Profiling:** visualizes distributions and missingness (133/136 columns have missing values; many are sparse).
